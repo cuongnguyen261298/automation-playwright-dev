@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
-import { LinearSearch } from "../../src/pages/Algorithm/LinearSeach";
-import { BubbleSort } from "../../src/pages/Algorithm/BubbleShort";
+import { LinearSearch } from "../../pages/Algorithm/LinearSeach";
+import { BubbleSort } from "../../pages/Algorithm/BubbleShort";
 
 test("Linear search - Find special character in an array", async () => {
   const arrTest = [
