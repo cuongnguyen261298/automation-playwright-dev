@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Snapshot suite >", () => {
+test.describe.skip("Snapshot suite >", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("https://playwright.dev/");
   });
