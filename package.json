@@ -15,6 +15,7 @@
   "dependencies": {
     "@zerostep/playwright": "^0.1.5",
     "dotenv": "^17.2.1",
-    "ollama": "^0.5.17"
+    "ollama": "^0.5.17",
+    "puppeteer": "^24.16.1"
   }
 }
