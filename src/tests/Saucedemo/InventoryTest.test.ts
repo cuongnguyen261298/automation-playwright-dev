@@ -13,11 +13,11 @@ test.describe("Login suite", () => {
     await signInPage.goTo();
     await signInPage.loginSwagLabs(
       `${process.env.STANDART_USER}`,
-      `${process.env.PASSWORD_FOR_ALL}`
+      `${process.env.PASSWORD_FOR_ALL}`,
     );
   });
 
   test(`should add product list`, async ({ inventoryPage }) => {
     await inventoryPage.addtoCartWithProductName(productList);
   });
-}); 
+});

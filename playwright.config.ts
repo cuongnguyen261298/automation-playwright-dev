@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: "html",
+  reporter: [["line"], ["allure-playwright"]],
   use: {
     trace: "on-first-retry",
     headless: true,
@@ -35,7 +35,7 @@ const config: PlaywrightTestConfig = {
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
-    }
+    },
   ],
 };
 

@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 // TOKEN in zerostep.config.js, please create and write
-import { ai } from '@zerostep/playwright';
+import { ai } from "@zerostep/playwright";
 
 //test failed
 // test.skip('Sign in successful to integration grid', async ({ page }) => {

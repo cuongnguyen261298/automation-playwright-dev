@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import BasePage from "../BasePage/basePage";
-import {verifyElementExist} from '../../utils/assertUtils'
+import { verifyElementExist } from "../../utils/assertUtils";
 
 interface ProductTest {
   name: string;
@@ -32,7 +32,10 @@ export class InventoryPage extends BasePage {
       ["Sauce Labs Bolt T-Shirt", "sauce-labs-bolt-t-shirt"],
       ["Sauce Labs Fleece Jacket", "sauce-labs-fleece-jacket"],
       ["Sauce Labs Onesie", "sauce-labs-onesie"],
-      ["Test.allTheThings() T-Shirt (Red)", "test.allthethings()-t-shirt-(red)"]
+      [
+        "Test.allTheThings() T-Shirt (Red)",
+        "test.allthethings()-t-shirt-(red)",
+      ],
     ]);
 
     for (const key of productArr) {

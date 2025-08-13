@@ -1,4 +1,4 @@
-import {APIRequestContext} from 'playwright';
+import { APIRequestContext } from "playwright";
 
 let request: APIRequestContext;
 

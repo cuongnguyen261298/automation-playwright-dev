@@ -32,6 +32,6 @@ test("Bubble sort", async () => {
   ];
 
   const bbSort = new BubbleSort();
-  const onlyNumbers = iphones.filter(item => /^\d+$/.test(item));
+  const onlyNumbers = iphones.filter((item) => /^\d+$/.test(item));
   console.log(onlyNumbers);
 });

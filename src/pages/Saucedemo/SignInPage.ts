@@ -3,7 +3,6 @@ import BasePage from "../BasePage/basePage";
 import { waitForResponseWithAction } from "../BasePage/networkUtil";
 
 export class SignInPage extends BasePage {
-
   userNameLocator = this.browserPage.locator(`//*[@id='user-name']`);
   passWordLocator = this.browserPage.locator(`//*[@id='password']`);
 

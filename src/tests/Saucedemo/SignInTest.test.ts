@@ -6,8 +6,13 @@ test.describe("Login suite", () => {
     await signInPage.goTo();
   });
 
-  test(`should login successful with "${process.env.STANDART_USER}"`, async ({ signInPage }) => {
-    await signInPage.loginSwagLabs(`${process.env.STANDART_USER}`, `${process.env.PASSWORD_FOR_ALL}`);
+  test(`should login successful with "${process.env.STANDART_USER}"`, async ({
+    signInPage,
+  }) => {
+    await signInPage.loginSwagLabs(
+      `${process.env.STANDART_USER}`,
+      `${process.env.PASSWORD_FOR_ALL}`,
+    );
     //assert: should verify rely on permission of user
   });
 });

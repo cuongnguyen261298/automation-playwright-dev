@@ -49,27 +49,27 @@ test.skip("What i have done", async ({}) => {
 test.skip("Ollama chat", async ({}) => {
   const gen = await ollama.chat({
     model: "llama3.1",
-    messages:[
+    messages: [
       {
-        role: 'user',
-        content: 'Playwright revenue to now?, shorten 50 words'
-      }
+        role: "user",
+        content: "Playwright revenue to now?, shorten 50 words",
+      },
     ],
   });
   console.log(gen.message);
 });
 
 test.skip("Ollama chat with image", async ({}) => {
-  const imageBuffer = fs.readFileSync('tests/images/img_001.jpg');
+  const imageBuffer = fs.readFileSync("tests/images/img_001.jpg");
   const imageTest = imageBuffer.toString("base64");
   const gen = await ollama.chat({
     model: "llava",
-    messages:[
+    messages: [
       {
-        role: 'user',
-        content: 'How many people in image, who?, shorten 50 words',
-        images:[imageTest]
-      }
+        role: "user",
+        content: "How many people in image, who?, shorten 50 words",
+        images: [imageTest],
+      },
     ],
   });
   console.log(gen.message);
@@ -77,18 +77,18 @@ test.skip("Ollama chat with image", async ({}) => {
 
 //exceed timeout
 test.skip("Ollama chat, extract text with image", async ({}) => {
-  const imageBuffer = fs.readFileSync('tests/images/img_001.jpg');
+  const imageBuffer = fs.readFileSync("tests/images/img_001.jpg");
   const imageTest = imageBuffer.toString("base64");
 
   const gen = await ollama.chat({
     model: "llava",
     stream: false,
-    messages:[
+    messages: [
       {
-        role: 'user',
-        content: 'Extract text only from image, write line two rows',
-        images:[imageTest]
-      }
+        role: "user",
+        content: "Extract text only from image, write line two rows",
+        images: [imageTest],
+      },
     ],
   });
   console.log(gen.message);
@@ -96,18 +96,18 @@ test.skip("Ollama chat, extract text with image", async ({}) => {
 
 //exceed timeout
 test.skip("Ollama chat, The man who wear the white clothes", async ({}) => {
-  const imageBuffer = fs.readFileSync('tests/images/img_001.jpg');
+  const imageBuffer = fs.readFileSync("tests/images/img_001.jpg");
   const imageTest = imageBuffer.toString("base64");
 
   const gen = await ollama.chat({
     model: "llava",
     stream: false,
-    messages:[
+    messages: [
       {
-        role: 'user',
-        content: 'The man who on the left, Who is he?, shorten 50 words',
-        images:[imageTest]
-      }
+        role: "user",
+        content: "The man who on the left, Who is he?, shorten 50 words",
+        images: [imageTest],
+      },
     ],
   });
   console.log(gen.message);

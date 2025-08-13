@@ -3,7 +3,7 @@ export class Data {
     throw new Error("Cannot instantiate Data class");
   }
   private static _dbInternalIdList: string[] = [];
-  
+
   public static get dbInternalIdList(): string[] {
     return Data._dbInternalIdList;
   }
