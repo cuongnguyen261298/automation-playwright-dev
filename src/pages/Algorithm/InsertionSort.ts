@@ -1,6 +1,4 @@
-export class InsertionSort{
-    //O(n*n)
-    constructor(){
-        
-    }
+export class InsertionSort {
+  //O(n*n)
+  constructor() {}
 }

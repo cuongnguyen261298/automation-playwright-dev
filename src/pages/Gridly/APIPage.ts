@@ -23,7 +23,7 @@ export class APIBase {
             name: dbName,
           },
           headers: this.headers,
-        }
+        },
       );
       const responseBody = await response.json();
       Data.dbInternalIdList.push(responseBody.id);
@@ -65,6 +65,6 @@ export async function whitelistAccount(email: string) {
         Accept: "application/json",
         Authorization: "ApiKey gk_2ekBpLJbtuFime",
       },
-    }
+    },
   );
 }

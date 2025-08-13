@@ -1,10 +1,13 @@
-import {expect, Locator} from 'playwright/test';
-import {getPage} from '../utils/pageUtils';
+import { expect, Locator } from "playwright/test";
+import { getPage } from "../utils/pageUtils";
 
-export async function verifyElementNotExist(element: Locator | string, exactText = false) {
+export async function verifyElementNotExist(
+  element: Locator | string,
+  exactText = false,
+) {
   let locator: Locator;
-  if (typeof element === 'string') {
-    locator = getPage().getByText(element, {exact: exactText});
+  if (typeof element === "string") {
+    locator = getPage().getByText(element, { exact: exactText });
   } else {
     locator = element;
   }
@@ -13,7 +16,7 @@ export async function verifyElementNotExist(element: Locator | string, exactText
 
 export async function verifyElementExist(element: Locator | string) {
   let locator: Locator;
-  if (typeof element === 'string') {
+  if (typeof element === "string") {
     locator = getPage().getByText(element);
   } else {
     locator = element;
@@ -21,10 +24,15 @@ export async function verifyElementExist(element: Locator | string) {
   await expect.soft(locator).toBeVisible();
 }
 
-export async function verifyElementListExist(elements: Locator[] | string[], exactText = false) {
-  if (typeof elements[0] === 'string') {
+export async function verifyElementListExist(
+  elements: Locator[] | string[],
+  exactText = false,
+) {
+  if (typeof elements[0] === "string") {
     for (const element of elements) {
-      await expect.soft(getPage().getByText(element as string, {exact: exactText})).toBeVisible();
+      await expect
+        .soft(getPage().getByText(element as string, { exact: exactText }))
+        .toBeVisible();
     }
   } else {
     for (const element of elements) {
@@ -37,7 +45,10 @@ export async function verifyElementHaveText(element: Locator, content: string) {
   await expect.soft(element).toHaveText(content);
 }
 
-export async function verifyElementContainText(element: Locator, content: string) {
+export async function verifyElementContainText(
+  element: Locator,
+  content: string,
+) {
   await expect.soft(element).toContainText(content);
 }
 

@@ -1,4 +1,4 @@
-export class SelectionSort{
-    //O(n*n)
-    constructor(){}
+export class SelectionSort {
+  //O(n*n)
+  constructor() {}
 }

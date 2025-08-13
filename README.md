@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 # automation-playwright.dev
 Playwright experiment
-=======
 ## Zero step
 - add zerostep dependency
 - Key in zerostep.config.json
@@ -16,4 +14,7 @@ Playwright experiment
 
 ## Run specific test without debug
 - npx playwright test src/tests/{path}.test.ts
->>>>>>> 23a71e7 (initial commit: playwright repo)
+
+## Reporter
+- npx playwright test --reporter=allure-playwright
+- npx playwright test src/tests/{path}.test.ts --reporter=allure-playwright

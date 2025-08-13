@@ -9,7 +9,7 @@ interface XiaomiWatch {
   description?: string;
 }
 export class LinearSearch {
-//0(n)
+  //0(n)
   constructor() {}
 
   async hasSpecialCharacter(str: string) {
@@ -41,9 +41,7 @@ export class LinearSearch {
     );
   }
   // Hàm Linear Search để kiểm tra và đếm status
-  async analyzeObjects(
-    arr: XiaomiWatch[]
-  ): Promise<{
+  async analyzeObjects(arr: XiaomiWatch[]): Promise<{
     validObjects: number;
     trueCount: number;
     falseCount: number;
@@ -73,7 +71,7 @@ export class LinearSearch {
       validObjects,
       trueCount,
       falseCount,
-      invalidObjects
+      invalidObjects,
     };
   }
 }
