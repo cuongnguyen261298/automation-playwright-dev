@@ -1,6 +1,7 @@
 import { test } from "../../core/baseTest";
+import { UserCredential } from "../../core/sharedUserData";
 
-test.describe("Login suite", () => {
+test.describe("Add to cart suite>", () => {
   // arrange
   const productList = [
     "Sauce Labs Backpack",
@@ -9,12 +10,17 @@ test.describe("Login suite", () => {
     "Sauce Labs Bolt T-Shirt",
   ];
 
+  const userListHaveTest = [
+    UserCredential.STANDARD_USER,
+    UserCredential.LOCKED_OUT_USER,
+    UserCredential.PROBLEM_USER,
+    UserCredential.ERROR_USER,
+    UserCredential.VISUAL_USER,
+  ];
+
   test.beforeEach(async ({ signInPage }) => {
     await signInPage.goTo();
-    await signInPage.loginSwagLabs(
-      `${process.env.STANDART_USER}`,
-      `${process.env.PASSWORD_FOR_ALL}`,
-    );
+    await signInPage.signInWith(userListHaveTest[0]);
   });
 
   test(`should add product list`, async ({ inventoryPage }) => {
