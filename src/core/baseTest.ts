@@ -5,7 +5,7 @@ import { OnlineCalculatorPage } from "../pages/GUI-Automation/OnlineCalculatorPa
 import {UserCredential} from "../core/sharedUserData"
 
 type pages = {
-  // account: UserCredential;
+  account: UserCredential;
   signInPage: SignInPage;
   onlineCalculatorPage: OnlineCalculatorPage;
   inventoryPage: InventoryPage;

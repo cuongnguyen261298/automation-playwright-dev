@@ -16,7 +16,7 @@ export class InventoryPage extends BasePage {
     super(browserPage);
   }
 
-  async goTo(url: string = `./inventory.html`) {
+  async goTo(url: string = `https://www.saucedemo.com/inventory.html`) {
     await this.browserPage.goto(url);
   }
   getBtnAddtoCartLocator = (productName: string) =>

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import { SignInPage } from "../pages/Saucedemo/SignInPage";
-import { UserCredential } from "../core/sharedUserData";
+import { UserCredential, SharedUserData } from "../core/sharedUserData";
 
 const logger = console;
 
@@ -20,32 +20,32 @@ async function setUpCookie() {
   logger.info("__dirname is:", __dirname);
   const users = [
     {
-      name: "STANDARD_USER",
+      name: 'STANDARD_USER',
       authFile: path.join(
         __dirname,
         `../.auth/${process.env.STANDARD_USER}.json`
       ),
     },
     {
-      name: "LOCKED_OUT_USER",
+      name: 'LOCKED_OUT_USER',
       authFile: path.join(
         __dirname,
         `../.auth/${process.env.LOCKED_OUT_USER}.json`
       ),
     },
     {
-      name: "PROBLEM_USER",
+      name: 'PROBLEM_USER',
       authFile: path.join(
         __dirname,
         `../.auth/${process.env.PROBLEM_USER}.json`
       ),
     },
     {
-      name: "ERROR_USER",
+      name:'ERROR_USER',
       authFile: path.join(__dirname, `../.auth/${process.env.ERROR_USER}.json`),
     },
     {
-      name: "VISUAL_USER",
+      name: 'VISUAL_USER',
       authFile: path.join(
         __dirname,
         `../.auth/${process.env.VISUAL_USER}.json`
@@ -59,8 +59,11 @@ async function setUpCookie() {
     const context = await browser.newContext();
     const page = await context.newPage();
     const signInPage = new SignInPage(page);
+
     await signInPage.goTo(`${process.env.SAUCEDEMO_URL}`);
     await signInPage.signInWith(UserCredential[user.name]);
+    console.log("signInWith: ", UserCredential[user.name])
+
     await context.storageState({ path: user.authFile });
     await context.close();
     logger.info(`Saved cookie for ${user.name}`);

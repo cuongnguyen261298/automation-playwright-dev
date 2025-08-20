@@ -20,17 +20,17 @@ export class SignInPage extends BasePage {
   async signInWith(account: UserCredential) {
     console.log("Storage :", account);
     const acc = SharedUserData.accountMap.get(account);
-    await this.loginSwagLabs(acc?.[0] ?? '', acc?.[1] ?? '');
+    console.log("Account signed ==", acc);
+    await this.loginSwagLabs(acc?.[0] ?? "", acc?.[1] ?? "");
   }
 
   async loginSwagLabs(userName: string, passWord: string) {
     await this.userName.fill(userName);
     await this.passWord.fill(passWord);
-    await this.btnLogin.click();
-    // await waitForResponseWithAction({
-    //   requestUrlPathToMatch: "submit",
-    //   uiAction: this.browserPage.locator(`//*[@id='login-button']`).click(),
-    //   statusCode: 401,
-    // });
+    await waitForResponseWithAction({
+      requestUrlPathToMatch: "submit",
+      uiAction: this.browserPage.locator(`//*[@id='login-button']`).click(),
+      statusCode: 401,
+    });
   }
 }

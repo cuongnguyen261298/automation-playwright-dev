@@ -7,26 +7,55 @@ dotenv.config({
 });
 
 export enum UserCredential {
-  STANDARD_USER = 'src/.auth/standard_user.json',
-  LOCKED_OUT_USER = 'src/.auth/locked_out_user.json',
-  PROBLEM_USER = 'src/.auth/problem_user.json',
-  ERROR_USER = 'src/.auth/error_user.json',
-  VISUAL_USER = 'src/.auth/visual_user.json',
+  STANDARD_USER = "src/.auth/standard_user.json",
+  LOCKED_OUT_USER = "src/.auth/locked_out_user.json",
+  PROBLEM_USER = "src/.auth/problem_user.json",
+  ERROR_USER = "src/.auth/error_user.json",
+  VISUAL_USER = "src/.auth/visual_user.json",
 }
 
 export class SharedUserData {
-
   private constructor() {
     // singleton, one instance only
     throw new error("Cannot instantiate class, Only use private props/methods");
   }
 
-  private static _accountMap = new Map<UserCredential, [string, string]>([
-    [UserCredential.STANDARD_USER , [process.env.STANDARD_USER ?? '', process.env.PASSWORD_FOR_ALL ?? '']],
-    [UserCredential.LOCKED_OUT_USER , [process.env.LOCKED_OUT_USER ?? '', process.env.PASSWORD_FOR_ALL ?? '']],
-    [UserCredential.PROBLEM_USER , [process.env.PROBLEM_USER ?? '', process.env.PASSWORD_FOR_ALL ?? '']],
-    [UserCredential.ERROR_USER , [process.env.ERROR_USER ?? '', process.env.PASSWORD_FOR_ALL ?? '']],
-    [UserCredential.VISUAL_USER , [process.env.VISUAL_USER ?? '', process.env.PASSWORD_FOR_ALL ?? '']]
+  private static _accountMap = new Map<string, [string, string]>([
+    [
+      UserCredential.STANDARD_USER,
+      [
+        process.env.STANDARD_USER ?? "standard_user",
+        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+      ],
+    ],
+    [
+      UserCredential.LOCKED_OUT_USER,
+      [
+        process.env.LOCKED_OUT_USER ?? "locked_out_user",
+        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+      ],
+    ],
+    [
+      UserCredential.PROBLEM_USER,
+      [
+        process.env.PROBLEM_USER ?? "problem_user",
+        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+      ],
+    ],
+    [
+      UserCredential.ERROR_USER,
+      [
+        process.env.ERROR_USER ?? "error_user",
+        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+      ],
+    ],
+    [
+      UserCredential.VISUAL_USER,
+      [
+        process.env.VISUAL_USER ?? "visual_user",
+        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+      ],
+    ],
   ]);
 
   //The underscore prefix, uniquely distinguish an entity
@@ -39,9 +68,11 @@ export class SharedUserData {
   public static set accountMap(value) {
     SharedUserData._accountMap = value;
   }
+
   public static get name(): string {
     return SharedUserData._name;
   }
+
   public static set name(value: string) {
     SharedUserData._name = value;
   }
