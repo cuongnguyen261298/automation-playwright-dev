@@ -2,6 +2,7 @@
   "name": "playwright-demo",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint src",
     "format": "prettier src --write",
@@ -28,6 +29,7 @@
   "dependencies": {
     "@zerostep/playwright": "^0.1.5",
     "dotenv": "^17.2.1",
+    "husky": "^9.1.7",
     "ollama": "^0.5.17",
     "puppeteer": "^24.16.1"
   }
