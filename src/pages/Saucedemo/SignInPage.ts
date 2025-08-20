@@ -1,10 +1,13 @@
 import { Page } from "@playwright/test";
 import BasePage from "../BasePage/basePage";
 import { waitForResponseWithAction } from "../BasePage/networkUtil";
+import { UserCredential, SharedUserData } from "../../core/sharedUserData";
 
 export class SignInPage extends BasePage {
-  userNameLocator = this.browserPage.locator(`//*[@id='user-name']`);
-  passWordLocator = this.browserPage.locator(`//*[@id='password']`);
+  //temple locator structure
+  userName = this.browserPage.locator(`//*[@id='user-name']`);
+  passWord = this.browserPage.locator(`//*[@id='password']`);
+  btnLogin = this.browserPage.locator(`//*[@id='login-button']`);
 
   constructor(browserPage: Page) {
     super(browserPage);
@@ -14,14 +17,20 @@ export class SignInPage extends BasePage {
     await this.browserPage.goto(url);
   }
 
-  async loginSwagLabs(userName: string, passWord: string) {
-    await this.userNameLocator.fill(userName);
-    await this.passWordLocator.fill(passWord);
+  async signInWith(account: UserCredential) {
+    console.log("Storage :", account);
+    const acc = SharedUserData.accountMap.get(account);
+    await this.loginSwagLabs(acc?.[0] ?? '', acc?.[1] ?? '');
+  }
 
-    await waitForResponseWithAction({
-      requestUrlPathToMatch: "submit",
-      uiAction: this.browserPage.locator(`//*[@id='login-button']`).click(),
-      statusCode: 401,
-    });
+  async loginSwagLabs(userName: string, passWord: string) {
+    await this.userName.fill(userName);
+    await this.passWord.fill(passWord);
+    await this.btnLogin.click();
+    // await waitForResponseWithAction({
+    //   requestUrlPathToMatch: "submit",
+    //   uiAction: this.browserPage.locator(`//*[@id='login-button']`).click(),
+    //   statusCode: 401,
+    // });
   }
 }

@@ -1,18 +1,26 @@
 import { test } from "../../core/baseTest";
+import { UserCredential } from "../../core/sharedUserData";
 
-test.describe("Login suite", () => {
-  // arrange
-  test.beforeEach(async ({ signInPage }) => {
-    await signInPage.goTo();
-  });
+const userListHaveTest = [
+  UserCredential.STANDARD_USER,
+  UserCredential.LOCKED_OUT_USER,
+  UserCredential.PROBLEM_USER,
+  UserCredential.ERROR_USER,
+  UserCredential.VISUAL_USER,
+];
+for (const user of userListHaveTest) {
+  test.describe("Login suite >", () => {
+    test.use({
+      storageState: user,
+    });
+    // arrange
+    test.beforeEach(async ({ signInPage }) => {
+      await signInPage.goTo();
+      await signInPage.signInWith(user);
+    });
+    test.afterEach(async ({}) => {});
 
-  test(`should login successful with "${process.env.STANDART_USER}"`, async ({
-    signInPage,
-  }) => {
-    await signInPage.loginSwagLabs(
-      `${process.env.STANDART_USER}`,
-      `${process.env.PASSWORD_FOR_ALL}`,
-    );
-    //assert: should verify rely on permission of user
+    test(`should login successful with ${user}`, async ({ signInPage }) => {
+    });
   });
-});
+}

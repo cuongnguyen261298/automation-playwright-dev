@@ -2,9 +2,10 @@ import { test as baseTest } from "@playwright/test";
 import { SignInPage } from "../pages/Saucedemo/SignInPage";
 import { InventoryPage } from "../pages/Saucedemo/InventoryPage";
 import { OnlineCalculatorPage } from "../pages/GUI-Automation/OnlineCalculatorPage";
+import {UserCredential} from "../core/sharedUserData"
 
 type pages = {
-  //   account: UserCredential;
+  // account: UserCredential;
   signInPage: SignInPage;
   onlineCalculatorPage: OnlineCalculatorPage;
   inventoryPage: InventoryPage;

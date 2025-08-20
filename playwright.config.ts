@@ -2,10 +2,12 @@ import { PlaywrightTestConfig, devices } from "@playwright/test";
 import dotenv from "dotenv";
 
 dotenv.config({
+  //Based on loaded variables in .NODE_ENV, else based on loaded variables in .production file
   path: `src/env/.env.${process.env.NODE_ENV || "production"}`,
 });
 
 const config: PlaywrightTestConfig = {
+  globalSetup: 'src/core/globalSetup.ts',
   timeout: 120_000,
   testDir: "src/tests",
   fullyParallel: false,
