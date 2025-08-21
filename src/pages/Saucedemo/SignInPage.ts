@@ -18,7 +18,6 @@ export class SignInPage extends BasePage {
   }
 
   async signInWith(account: UserCredential) {
-    console.log("Storage :", account);
     const acc = SharedUserData.accountMap.get(account);
     console.log("Account signed ==", acc);
     await this.loginSwagLabs(acc?.[0] ?? "", acc?.[1] ?? "");
