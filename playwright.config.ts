@@ -10,7 +10,7 @@ const config: PlaywrightTestConfig = {
   globalSetup: 'src/core/globalSetup.ts',
   timeout: 120_000,
   testDir: "src/tests",
-  fullyParallel: false,
+  fullyParallel: false, // relevance to sharding of CPU
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,

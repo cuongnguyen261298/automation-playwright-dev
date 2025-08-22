@@ -7,6 +7,7 @@ import { OverviewPage } from "../pages/Saucedemo/OverviewPage";
 import { CompletePage } from "../pages/Saucedemo/CompletePage";
 import { OnlineCalculatorPage } from "../pages/GUI-Automation/OnlineCalculatorPage";
 import { UserCredential } from "../core/sharedUserData";
+import {PracticeUploadPage} from "../pages/PracticeExpand/PracticeUploadPage"
 
 type pages = {
   account: UserCredential;
@@ -17,6 +18,7 @@ type pages = {
   informationPage: InformationPage;
   overviewPage: OverviewPage;
   completePage: CompletePage;
+  practiceUploadPage: PracticeUploadPage;
 };
 
 export const test = baseTest.extend<pages>({
@@ -47,6 +49,10 @@ export const test = baseTest.extend<pages>({
 
   onlineCalculatorPage: async ({ page }, use) => {
     await use(new OnlineCalculatorPage(page));
+  },
+
+  practiceUploadPage: async({page}, use)=>{
+    await use(new PracticeUploadPage(page));
   },
   
   // ensure page is closed after each test

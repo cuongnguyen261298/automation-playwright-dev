@@ -1,0 +1,8 @@
+"Segment Number",Source,Target,"Warning Level","Error Type","Error Code",Details
+1,"Keep your work on","Keep your work",error,"Count regex",50000001307,"Count mismatches between source and target Source regex: 14 -> Target regex: 12"
+2,"91209201 abc",cnp@gridlygridly.ccomm,error,"Count regex",50000001307,"Count mismatches between source and target Source regex: 3 -> Target regex: 20"
+3,"Explanation: ""System"" is incorrectly capitalized when the style guide specifies lowercase for common nouns like ""system.""","Explanation: 12390329302903 is incorrectly capitalized when the style guide specifies lowercase for common nouns like ""0000.""",error,"Count regex",50000001307,"Count mismatches between source and target Source regex: 100 -> Target regex: 88"
+4,123-45-6789,"Explanation: 12390329302903 is incorrectly capitalized when the style guide specifies lowercase for common nouns like ""0000.""",error,"source.phoneValidation.Forbidden",30000001304,"The regex ""123-45-6789"" is forbidden."
+,,,error,"Count regex",50000001307,"Count mismatches between source and target Source regex: 0 -> Target regex: 88"
+5,cnp@gridlygridly.ccomm,123-45-6789,error,"target.phoneValidation.Forbidden",40000001305,"The regex ""123-45-6789"" is forbidden."
+,,,error,"Count regex",50000001307,"Count mismatches between source and target Source regex: 20 -> Target regex: 0"
