@@ -20,7 +20,10 @@ export class SignInPage extends BasePage {
   async signInWith(account: UserCredential) {
     const acc = SharedUserData.accountMap.get(account);
     console.log("Account signed ==", acc);
-    await this.loginSwagLabs(acc?.[0] ?? "", acc?.[1] ?? "");
+    // || if acc is falsy(undefined, null, etc) then replace with default value
+    await this.loginSwagLabs(acc?.[0] || "standard_user", acc?.[1] || "secret_sauce");
+    // ?? if acc is falsy(undefined, null, etc) then do not replace
+    // await this.loginSwagLabs(acc?.[0] ?? "standard_user", acc?.[1] ?? "secret_sauce");
   }
 
   async loginSwagLabs(userName: string, passWord: string) {

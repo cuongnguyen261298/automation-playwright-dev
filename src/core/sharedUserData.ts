@@ -24,36 +24,36 @@ export class SharedUserData {
     [
       UserCredential.STANDARD_USER,
       [
-        process.env.STANDARD_USER ?? "standard_user",
-        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+        process.env.STANDARD_USER || "standard_user",
+        process.env.PASSWORD_FOR_ALL || "secret_sauce",
       ],
     ],
     [
       UserCredential.LOCKED_OUT_USER,
       [
-        process.env.LOCKED_OUT_USER ?? "locked_out_user",
-        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+        process.env.LOCKED_OUT_USER || "locked_out_user",
+        process.env.PASSWORD_FOR_ALL || "secret_sauce",
       ],
     ],
     [
       UserCredential.PROBLEM_USER,
       [
-        process.env.PROBLEM_USER ?? "problem_user",
-        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+        process.env.PROBLEM_USER || "problem_user",
+        process.env.PASSWORD_FOR_ALL || "secret_sauce",
       ],
     ],
     [
       UserCredential.ERROR_USER,
       [
-        process.env.ERROR_USER ?? "error_user",
-        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+        process.env.ERROR_USER || "error_user",
+        process.env.PASSWORD_FOR_ALL || "secret_sauce",
       ],
     ],
     [
       UserCredential.VISUAL_USER,
       [
-        process.env.VISUAL_USER ?? "visual_user",
-        process.env.PASSWORD_FOR_ALL ?? "secret_sauce",
+        process.env.VISUAL_USER || "visual_user",
+        process.env.PASSWORD_FOR_ALL || "secret_sauce",
       ],
     ],
   ]);
