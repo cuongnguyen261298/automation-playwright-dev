@@ -2,6 +2,7 @@ import { test } from "../../core/baseTest";
 import { UserCredential } from "../../core/sharedUserData";
 import { verifyElementExist } from "../../utils/assertUtils";
 import { Information } from "../../constants/Saucedemo";
+import {getUserNameFromFileStorage} from "../../utils/splitUtils";
 
 // arrange
 const productList = [
@@ -30,7 +31,7 @@ for (const user of [
       await inventoryPage.resetAppState();
     });
 
-    test(`should add product list with storage ${user}`, async ({
+    test(`should add product list via storage with ${getUserNameFromFileStorage(user)}`, async ({
       inventoryPage,
     }) => {
       await inventoryPage.addtoCartWithProductName(productList);
@@ -52,7 +53,7 @@ for (const user of [UserCredential.STANDARD_USER, UserCredential.VISUAL_USER]) {
       await completePage.clickBackHome();
     });
 
-    test(`should order successful with ${user}`, async ({
+    test(`should order successful via storage with ${getUserNameFromFileStorage(user)}`, async ({
       inventoryPage,
       cartPage,
       informationPage,
