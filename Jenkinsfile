@@ -1,9 +1,5 @@
 pipeline {
   agent {
-    node {
-      label 'npm'
-    }
-
   }
   stages {
     stage('stage 1') {
