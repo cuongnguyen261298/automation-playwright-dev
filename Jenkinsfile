@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker { 
+            image 'node:23.11.0'
+            args '-u root'
+        }
+    }
     environment {
         PLAYWRIGHT_REPORT = "The reporter"
     }
@@ -12,21 +17,11 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            agent {
-                docker { 
-                    image 'node:23.11.0' 
-                }
-            }
             steps {
                 git url: 'https://github.com/cuongnguyen261298/automation-playwright-dev.git', branch: "develop"
             }
         }
         stage('Installing deps') {
-            agent {
-                docker { 
-                    image 'node:23.11.0' 
-                }
-            }
             steps {     
                 sh """
                     npm ci
@@ -36,11 +31,6 @@ pipeline {
             }
         }
         stage('Running tests') {
-            agent {
-                docker { 
-                    image 'node:23.11.0' 
-                }
-            }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
                     script {
