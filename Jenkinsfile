@@ -1,9 +1,9 @@
 pipeline {
     agent {
-        // docker { 
-        //     image 'node:22.15-bookworm'
-        //     args '-u root'
-        // }
+        docker { 
+            image '2.527-jdk21'
+            args '-u root'
+        }
     }
 
     environment {
@@ -23,7 +23,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: "https://github.com/cuongnguyen261298/automation-playwright.dev.git", 
+                git url: "https://github.com/cuongnguyen261298/automation-playwright-dev.git", 
                 branch: "${params.BRANCH_NAME}",
             }
         }
