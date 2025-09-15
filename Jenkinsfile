@@ -12,6 +12,11 @@ pipeline {
 
     stages {
         stage('Checkout') {
+            agent {
+                docker { 
+                    image 'node:23.11.0' 
+                }
+            }
             steps {
                 git url: 'https://github.com/cuongnguyen261298/automation-playwright-dev.git', branch: "develop"
             }
@@ -31,6 +36,11 @@ pipeline {
             }
         }
         stage('Running tests') {
+            agent {
+                docker { 
+                    image 'node:23.11.0' 
+                }
+            }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
                     script {
