@@ -18,11 +18,23 @@ pipeline {
 
     stages {
         stage('Checkout') {
+            agent {
+                docker { 
+                    image '2.527-jdk21'
+                    args '-u root'
+                }
+            }
             steps {
                 git url: 'https://github.com/cuongnguyen261298/automation-playwright-dev.git', branch: "${params.BRANCH_NAME}"
             }
         }
         stage('Installing deps') {
+            agent {
+                docker { 
+                    image '2.527-jdk21'
+                    args '-u root'
+                }
+            }
             steps {     
                 sh """
                     npm ci 
@@ -32,6 +44,12 @@ pipeline {
             }
         }
         stage('Running tests') {
+            agent {
+                docker { 
+                    image '2.527-jdk21'
+                    args '-u root'
+                }
+            }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
                     script {
