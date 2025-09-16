@@ -10,9 +10,9 @@ pipeline {
     }
 
     parameters {
-        choice(name: 'TEST_ENVIRONMENT', choices: ['production'], description: 'Pick a environment to run tests')
-        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Branch to run tests from')
-        string(name: 'TEST_FILE', defaultValue: 'src/tests', description: 'Specific Playwright test file or folder')
+        choice(name: 'TEST_ENVIRONMENT', choices: ['production'], description: 'Pick a environment')
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to run')
+        string(name: 'TEST_FILE', defaultValue: 'src/tests', description: 'Specific test file or folder')
     }
 
     stages {
@@ -44,15 +44,12 @@ pipeline {
         }
     }
 
-    // post {
-    //     always {
-    //         publishHTML(target: [
-    //             allowMissing: true,
-    //             alwaysLinkToLastBuild: false,
-    //             keepAll: true,
-    //             reportFiles: 'index.html',
-    //             reportName: 'Report by The Reporter'
-    //         ])
-    //     }
-    // }
+    post {
+        always {
+            publishHTML(target: [
+                reportFiles: 'index.html',
+                reportName: 'Report by The Reporter'
+            ])
+        }
+    }
 }
