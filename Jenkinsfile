@@ -16,11 +16,13 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 git url: 'https://github.com/cuongnguyen261298/automation-playwright-dev.git', branches: [[name: "${params.BRANCH_NAME}"]]
             }
         }
+
         stage('Installing deps') {
             steps {     
                 sh """
@@ -30,6 +32,7 @@ pipeline {
                 """
             }
         }
+
         stage('Running tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
@@ -41,6 +44,7 @@ pipeline {
                     }
                 }
             }
+        }
         post {
             always {
                 publishHTML(target: [
