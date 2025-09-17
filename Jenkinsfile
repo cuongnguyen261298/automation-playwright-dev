@@ -45,14 +45,5 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                publishHTML(target: [
-                    reportFiles: 'index.html',
-                    reportName: 'Report by The Reporter'
-                ])
-            }
-        }
-
     }
 }
