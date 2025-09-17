@@ -11,7 +11,7 @@ Playwright Experiment
 - npx playwright test src/tests/{path}.test.ts
 
 ## Reporter
-- npx playwright test --reporter=allure-playwright
+- npx playwright test --reporter=allure-playwright -> npx playwright show-report
 - npx playwright test src/tests/{path}.test.ts --reporter=allure-playwright
 
 ## AI integrations
