@@ -19,7 +19,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/cuongnguyen261298/automation-playwright-dev.git', branches: [[name: "${params.BRANCH_NAME}"]]
+                git url: 'https://github.com/cuongnguyen261298/automation-playwright-dev.git', branch: "${params.BRANCH_NAME}"
             }
         }
 
