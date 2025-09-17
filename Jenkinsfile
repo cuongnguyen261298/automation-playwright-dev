@@ -10,15 +10,15 @@ pipeline {
     }
 
     parameters {
-        choice(name: 'TEST_ENVIRONMENT', choices: ['production'], description: 'Pick a environment')
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to run')
+        choice(name: 'TEST_ENVIRONMENT', choices: ['develop', 'staging', 'production'], description: 'Pick a environment')
+        string(name: 'BRANCH_NAME', defaultValue: 'develop', description: 'Branch to run')
         string(name: 'TEST_FILE', defaultValue: 'src/tests', description: 'Specific test file or folder')
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/cuongnguyen261298/automation-playwright-dev.git', branch: "develop"
+                git url: 'https://github.com/cuongnguyen261298/automation-playwright-dev.git', branches: [[name: "${params.BRANCH_NAME}"]]
             }
         }
         stage('Installing deps') {
