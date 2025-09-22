@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import { SignInPage } from "../pages/Saucedemo/SignInPage";
-import { UserCredential, SharedUserData } from "../core/sharedUserData";
+import { UserCredential } from "../core/sharedUserData";
 
 const logger = console;
 
@@ -61,8 +61,8 @@ async function setUpCookie() {
     const signInPage = new SignInPage(page);
 
     await signInPage.goTo(`${process.env.SAUCEDEMO_URL}`);
-    await signInPage.signInWith(UserCredential[user.name]);
-    console.log("signInWith: ", UserCredential[user.name])
+    await signInPage.signInWith(UserCredential[user.name as keyof typeof UserCredential]);
+    console.log("signInWith: ", UserCredential[user.name as keyof typeof UserCredential])
 
     await context.storageState({ path: user.authFile });
     await context.close();

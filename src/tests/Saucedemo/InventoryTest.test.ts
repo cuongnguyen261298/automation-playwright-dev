@@ -12,7 +12,6 @@ const productList = [
   "Sauce Labs Bolt T-Shirt",
 ];
 
-// UserCredential.LOCKED_OUT_USER, This user have no test.
 for (const user of [
   UserCredential.STANDARD_USER,
   UserCredential.PROBLEM_USER,
