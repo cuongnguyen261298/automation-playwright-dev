@@ -1,5 +1,7 @@
 import { Page } from "@playwright/test";
 import BasePage from "../BasePage/basePage";
+import path from "path";
+
 
 export class PracticeUploadPage extends BasePage {
   fileInputLocator = this.browserPage.getByTestId('file-input');
@@ -14,7 +16,8 @@ export class PracticeUploadPage extends BasePage {
     await this.browserPage.goto(url);
   }
 
-  async uploadSingleFile(filePath: string){
+  async uploadSingleFile(fileName: string){
+    const filePath = path.join('src', 'testData', fileName);
     await Promise.all([
       // this.browserPage.waitForEvent('filechooser'),
       this.fileInputLocator.setInputFiles(filePath)
