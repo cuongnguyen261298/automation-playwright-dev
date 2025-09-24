@@ -7,7 +7,8 @@ import { OverviewPage } from "../pages/Saucedemo/OverviewPage";
 import { CompletePage } from "../pages/Saucedemo/CompletePage";
 import { OnlineCalculatorPage } from "../pages/GUI-Automation/OnlineCalculatorPage";
 import { UserCredential } from "../core/sharedUserData";
-import {PracticeUploadPage} from "../pages/PracticeExpand/PracticeUploadPage"
+import { PracticeUploadPage } from "../pages/PracticeExpand/PracticeUploadPage";
+import { JsonPlaceHolder } from "../pages/Jsonplaceholder/Users";
 
 type pages = {
   account: UserCredential;
@@ -19,6 +20,7 @@ type pages = {
   overviewPage: OverviewPage;
   completePage: CompletePage;
   practiceUploadPage: PracticeUploadPage;
+  jsonPlaceHolder: JsonPlaceHolder;
 };
 
 export const test = baseTest.extend<pages>({
@@ -51,10 +53,14 @@ export const test = baseTest.extend<pages>({
     await use(new OnlineCalculatorPage(page));
   },
 
-  practiceUploadPage: async({page}, use)=>{
+  practiceUploadPage: async ({ page }, use) => {
     await use(new PracticeUploadPage(page));
   },
-  
+
+  jsonPlaceHolder: async ({ page }, use) => {
+    await use(new JsonPlaceHolder(page.request));
+  },
+
   // ensure page is closed after each test
   page: async ({ page }, use) => {
     await use(page);

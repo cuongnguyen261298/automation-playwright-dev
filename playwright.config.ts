@@ -13,7 +13,8 @@ const config: PlaywrightTestConfig = {
   fullyParallel: false, // relevance to sharding of CPU
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  // workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   reporter: [["line"], ["allure-playwright"]],
   use: {
     trace: "on-first-retry",

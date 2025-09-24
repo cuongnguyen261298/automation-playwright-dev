@@ -6,7 +6,7 @@ export class APIBase {
   readonly request: APIRequestContext;
   readonly headers = {
     Accept: "application/json",
-    Authorization: `ApiKey ${process.env.API_KEY}`,
+    Authorization: `ApiKey ${process.env.PUBLIC_KEY}`,
   };
 
   constructor(request: APIRequestContext) {
@@ -23,7 +23,7 @@ export class APIBase {
             name: dbName,
           },
           headers: this.headers,
-        },
+        }
       );
       const responseBody = await response.json();
       Data.dbInternalIdList.push(responseBody.id);
@@ -63,8 +63,8 @@ export async function whitelistAccount(email: string) {
       ],
       headers: {
         Accept: "application/json",
-        Authorization: "ApiKey gk_2ekBpLJbtuFime",
+        Authorization: `ApiKey ${process.env.PUBLIC_KEY}`,
       },
-    },
+    }
   );
 }

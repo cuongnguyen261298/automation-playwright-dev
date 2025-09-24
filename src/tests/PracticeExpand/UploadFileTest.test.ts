@@ -8,9 +8,9 @@ test.describe("Upload suite >", () => {
   });
   test.afterEach(async ({}) => {});
   test(`should upload file`, async ({ practiceUploadPage }) => {
-    await practiceUploadPage.uploadSingleFile(`src/testData/vnnmzyvr7nqi1.csv`);
+    await practiceUploadPage.uploadSingleFile('vnnmzyvr7nqi1.csv');
     await verifyElementExist(
-      practiceUploadPage.txtFileUploaded("vnnmzyvr7nqi1.csv")
+      practiceUploadPage.txtFileUploaded('vnnmzyvr7nqi1.csv')
     );
   });
 });
