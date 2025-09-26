@@ -39,4 +39,26 @@ export class JsonPlaceHolder extends BasePage {
       console.log("User created: ", await response.json());
     }
   }
+
+  async createTodos(numberOfTodo: number) {
+    for (let i = 0; i < numberOfTodo; i++) {
+      const response = await this.request.post(
+        `https://jsonplaceholder.typicode.com/todos`,
+        {
+          data: {
+            userId: generateNameWithUUID("userId"),
+            name: generateNameWithUUID("name"),
+            title: generateNameWithUUID("title"),
+            agent: [{ roles: "NULL" }, { module: "NULL" }],
+            privileges: {
+              canCreate: true,
+              canEdit: true,
+              canDelete: false,
+            },
+          },
+        }
+      );
+      console.log("Todo created: ", await response.json());
+    }
+  }
 }
