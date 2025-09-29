@@ -2,7 +2,7 @@ import { test } from "../../core/baseTest";
 import { UserCredential } from "../../core/sharedUserData";
 import { verifyElementExist } from "../../utils/assertUtils";
 import { Information } from "../../constants/Saucedemo";
-import {getUserNameFromFileStorage} from "../../utils/splitUtils";
+import { getUserNameFromFileStorage } from "../../utils/splitUtils";
 
 // arrange
 const productList = [
@@ -68,7 +68,7 @@ for (const user of [UserCredential.STANDARD_USER, UserCredential.VISUAL_USER]) {
         postalCode: Information.POSTAL_CODE,
       });
       await overviewPage.clickFinish();
-      await verifyElementExist('test everything');
+      await verifyElementExist(completePage.txtOrdered);
     });
   });
 }
