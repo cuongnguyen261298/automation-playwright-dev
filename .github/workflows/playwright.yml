@@ -1,8 +1,8 @@
 name: Playwright Demo Testing
 
 on:
-  push:
-    branches: [ main ]
+  # push:
+  #   branches: [ main ]
   # pull_request:
   #   branches: [ main ]
   schedule:
@@ -25,8 +25,7 @@ jobs:
     - name: Install Playwright browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      # run: npx playwright test # run all tests
-      run: npx playwright test src/tests/Saucedemo/InventoryTest.test.ts
+      run: npx playwright test # run all tests
     - name: Upload Playwright report
       if: always() # save report even when tests failed
       uses: actions/upload-artifact@v4
