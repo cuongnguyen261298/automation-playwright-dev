@@ -7,7 +7,7 @@ dotenv.config({
 });
 
 const config: PlaywrightTestConfig = {
-  globalSetup: 'src/core/globalSetup.ts',
+  globalSetup: "src/core/globalSetup.ts",
   timeout: 120_000,
   testDir: "src/tests",
   fullyParallel: false, // relevance to sharding of CPU
@@ -24,6 +24,10 @@ const config: PlaywrightTestConfig = {
       args: ["--start-maximized"],
     },
     // screenshot: 'only-on-failure'
+    video: {
+      mode: "retain-on-failure",
+      size: { width: 1920, height: 1080 },
+    },
   },
 
   snapshotPathTemplate: "src/tests/snapshots/{testFilePath}/{testName}{ext}",

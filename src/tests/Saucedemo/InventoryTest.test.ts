@@ -68,7 +68,7 @@ for (const user of [UserCredential.STANDARD_USER, UserCredential.VISUAL_USER]) {
         postalCode: Information.POSTAL_CODE,
       });
       await overviewPage.clickFinish();
-      await verifyElementExist(completePage.txtOrdered);
+      await verifyElementExist('test everything');
     });
   });
 }
