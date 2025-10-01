@@ -2,25 +2,43 @@ import { test } from "../../core/baseTest";
 import { UserCredential } from "../../core/sharedUserData";
 import { verifyElementExist } from "../../utils/assertUtils";
 import { Information } from "../../constants/Saucedemo";
-import { getUserNameFromFileStorage } from "../../utils/splitUtils";
 
-// arrange
-const productList = [
-  "Sauce Labs Backpack",
-  "Sauce Labs Bike Light",
-  "Sauce Labs Fleece Jacket",
-  "Sauce Labs Bolt T-Shirt",
+const users = [
+  {
+    name: "Standard User",
+    account: UserCredential.STANDARD_USER,
+    productAddToCart: [
+      "Sauce Labs Backpack",
+      "Sauce Labs Bike Light",
+      "Sauce Labs Fleece Jacket",
+      "Sauce Labs Bolt T-Shirt",
+    ],
+  },
+  {
+    name: "Problem user",
+    account: UserCredential.PROBLEM_USER,
+    productAddToCart: ["Sauce Labs Backpack", "Sauce Labs Bike Light"],
+  },
+  {
+    name: "Error user",
+    account: UserCredential.ERROR_USER,
+    productAddToCart: ["Sauce Labs Backpack"],
+  },
+  {
+    name: "Visual user",
+    account: UserCredential.VISUAL_USER,
+    productAddToCart: [
+      "Sauce Labs Backpack",
+      "Sauce Labs Bike Light",
+      "Sauce Labs Bolt T-Shirt",
+    ],
+  },
 ];
 
-for (const user of [
-  UserCredential.STANDARD_USER,
-  UserCredential.PROBLEM_USER,
-  UserCredential.ERROR_USER,
-  UserCredential.VISUAL_USER,
-]) {
-  test.describe("Add to cart suite >", () => {
+users.forEach(({ name, account, productAddToCart }) => {
+  test.describe(`Add to cart suite > user: ${name}`, () => {
     test.use({
-      storageState: user,
+      storageState: account,
     });
     // arrange
     test.beforeEach(async ({ inventoryPage }) => {
@@ -30,20 +48,25 @@ for (const user of [
       await inventoryPage.resetAppState();
     });
 
-    test(`should add product list via storage with ${getUserNameFromFileStorage(user)}`, async ({
+    test(`should add product list via storage with ${name}`, async ({
       inventoryPage,
     }) => {
-      await inventoryPage.addtoCartWithProductName(productList);
+      await inventoryPage.addtoCartWithProductName(productAddToCart);
       await verifyElementExist(inventoryPage.cartBadgeLocator);
     });
   });
-}
+});
 
-for (const user of [UserCredential.STANDARD_USER, UserCredential.VISUAL_USER]) {
-  test.describe("Order suite >", () => {
+users.forEach(({ name, account, productAddToCart }) => {
+  test.describe(`Order suite > user: ${name}`, () => {
     test.use({
-      storageState: user,
+      storageState: account,
     });
+    test.skip(
+      account === UserCredential.PROBLEM_USER ||
+        account === UserCredential.ERROR_USER,
+      `Skip tests for ${name}`
+    );
     // arrange
     test.beforeEach(async ({ inventoryPage }) => {
       await inventoryPage.goTo();
@@ -52,14 +75,14 @@ for (const user of [UserCredential.STANDARD_USER, UserCredential.VISUAL_USER]) {
       await completePage.clickBackHome();
     });
 
-    test(`should order successful via storage with ${getUserNameFromFileStorage(user)}`, async ({
+    test(`should order successful with ${name}`, async ({
       inventoryPage,
       cartPage,
       informationPage,
       overviewPage,
       completePage,
     }) => {
-      await inventoryPage.addtoCartWithProductName(productList);
+      await inventoryPage.addtoCartWithProductName(productAddToCart);
       await inventoryPage.gotoShopCart();
       await cartPage.clickCheckoutYourCart();
       await informationPage.checkOutYourInformation({
@@ -71,4 +94,4 @@ for (const user of [UserCredential.STANDARD_USER, UserCredential.VISUAL_USER]) {
       await verifyElementExist(completePage.txtOrdered);
     });
   });
-}
+});

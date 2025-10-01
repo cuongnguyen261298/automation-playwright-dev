@@ -1,5 +1,7 @@
-import { expect, Locator } from "playwright/test";
+import { expect, Locator, Page} from "playwright/test";
 import { getPage } from "../utils/pageUtils";
+
+
 
 export async function verifyElementNotExist(
   element: Locator | string,
@@ -54,4 +56,8 @@ export async function verifyElementContainText(
 
 export async function verifyElementDisabled(element: Locator) {
   await expect.soft(element).toBeDisabled();
+}
+
+export async function verifyToHaveURL(page: Page, url: string) {
+  await expect.soft(page).toHaveURL(new RegExp(url));
 }
