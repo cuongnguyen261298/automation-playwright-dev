@@ -58,6 +58,7 @@ async function setUpCookie() {
   for (const user of users) {
     const context = await browser.newContext();
     const page = await context.newPage();
+    // init signIn page object for Saucedemo Page
     const signInPage = new SignInPage(page);
 
     await signInPage.goTo(`${process.env.SAUCEDEMO_URL}`);

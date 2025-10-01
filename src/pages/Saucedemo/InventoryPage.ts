@@ -21,7 +21,7 @@ export class InventoryPage extends BasePage {
     super(browserPage);
   }
 
-  async goTo(url: string = `https://www.saucedemo.com/inventory.html`) {
+  async goTo(url: string = `https://www.saucedemo.com`) {
     await this.browserPage.goto(url);
   }
 
