@@ -59,5 +59,5 @@ export async function verifyElementDisabled(element: Locator) {
 }
 
 export async function verifyToHaveURL(page: Page, url: string) {
-  await expect.soft(page).toHaveURL(url);
+  await expect.soft(page).toHaveURL(new RegExp(url));
 }

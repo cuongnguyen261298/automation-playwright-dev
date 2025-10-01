@@ -58,11 +58,15 @@ users.forEach(({ name, account, productAddToCart }) => {
 });
 
 users.forEach(({ name, account, productAddToCart }) => {
-  const shouldSkippedUsers = name === "Problem user" || name === "Error user";
   test.describe(`Order suite > user: ${name}`, () => {
     test.use({
       storageState: account,
     });
+    test.skip(
+      account === UserCredential.PROBLEM_USER ||
+        account === UserCredential.ERROR_USER,
+      `Skip tests for ${name}`
+    );
     // arrange
     test.beforeEach(async ({ inventoryPage }) => {
       await inventoryPage.goTo();
@@ -75,9 +79,9 @@ users.forEach(({ name, account, productAddToCart }) => {
       inventoryPage,
       cartPage,
       informationPage,
+      overviewPage,
       completePage,
     }) => {
-      test.skip(shouldSkippedUsers);
       await inventoryPage.addtoCartWithProductName(productAddToCart);
       await inventoryPage.gotoShopCart();
       await cartPage.clickCheckoutYourCart();
@@ -86,9 +90,8 @@ users.forEach(({ name, account, productAddToCart }) => {
         lastName: Information.LAST_NAME,
         postalCode: Information.POSTAL_CODE,
       });
-      // await overviewPage.clickFinish();
+      await overviewPage.clickFinish();
       await verifyElementExist(completePage.txtOrdered);
     });
   });
 });
-
