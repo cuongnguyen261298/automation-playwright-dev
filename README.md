@@ -1,4 +1,5 @@
-Playwright Experiment
+PLAYWRIGHT EXPERIMENT
+
 ## Node module license and version
 - Apache-2.0: puppeteer, allure, bare
 - MIT: dotenv, zerostep, ollama, proxy, husky, prettier
@@ -16,10 +17,13 @@ Playwright Experiment
 
 ## AI integrations
 1. Zero step
-- Add zerostep dependency
-- Key in zerostep.config.json
+- Must have zerostep-deps
+- Must have zerostep-key in zerostep.config.json
 2. Ollama
-- Add ollama dependency: npm install ollama
+- Install ollama dependency: npm install ollama
 - Install Ollama to local https://ollama.com/download
 - Perform start locally Ollama, ensure rụnning (check cmd: curl http://localhost:11434)
 - To read image from ollama, run "ollama run llava"
+
+## Grafana K6
+- k6 run {path}
