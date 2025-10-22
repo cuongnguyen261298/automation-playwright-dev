@@ -14,3 +14,13 @@ test.describe("Upload suite >", () => {
     );
   });
 });
+
+  test.skip(`should aggregate csv files`, async ({ practiceUploadPage }) => {
+    const inputDirectory = "src/testData/deDE";
+    const outputFile = "src/testData/deDE/aggregated.csv";
+    await practiceUploadPage.aggregateFiles(
+      inputDirectory,
+      outputFile,
+      ".csv"
+    );
+  });
