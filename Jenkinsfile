@@ -11,6 +11,7 @@ pipeline {
 
     parameters {
         choice(name: 'TEST_ENVIRONMENT', choices: ['develop', 'staging', 'production'], description: 'Pick a environment')
+        choice(name: 'BROWSER', choices: ['chromium', 'webkit', 'firefox'], description: 'Pick a browser to run tests')
         string(name: 'BRANCH_NAME', defaultValue: 'develop', description: 'Branch to run')
         string(name: 'TEST_FILE', defaultValue: 'src/tests', description: 'Specific test file or folder')
     }
@@ -27,8 +28,7 @@ pipeline {
             steps {     
                 sh """
                     npm ci
-                    npx playwright install --with-deps chromium
-                    npx playwright install --with-deps chrome
+                    npx playwright install --with-deps ${params.BROWSER}
                 """
             }
         }
@@ -38,8 +38,11 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
                     script {
                         echo "Environment: ${params.TEST_ENVIRONMENT}"
+                        def testFile = params.TEST_FILE
+                        def configFile = "ci.playwright.config.ts"
+                        
                         sh """
-                          npx playwright test ${params.TEST_FILE} -c ci.playwright.config.ts
+                          npx playwright test ${testFile} -c ${configFile} --project=${params.BROWSER} --workers=3
                         """
                     }
                 }
