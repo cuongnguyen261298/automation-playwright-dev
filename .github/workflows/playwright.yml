@@ -25,7 +25,7 @@ jobs:
     - name: Install Playwright browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test # run all tests
+      run: npx playwright test
     - name: Upload Playwright report
       if: always() # save report even when tests failed
       uses: actions/upload-artifact@v4
