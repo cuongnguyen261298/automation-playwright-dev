@@ -13,9 +13,8 @@ const config: PlaywrightTestConfig = {
   fullyParallel: false, // relevance to sharding of CPU
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  // workers: process.env.CI ? 1 : undefined,
-  workers: 1,
-  reporter: [["line"], ["allure-playwright"]],
+  workers: 3,
+  reporter: [["line"], ["html", { open: "never" }], ["allure-playwright"]],
   use: {
     trace: "on-first-retry",
     headless: true,
@@ -23,7 +22,7 @@ const config: PlaywrightTestConfig = {
     launchOptions: {
       args: ["--start-maximized"],
     },
-    // screenshot: 'only-on-failure'
+    screenshot: 'only-on-failure',
     video: {
       mode: "retain-on-failure",
       // size: { width: 1920, height: 1080 },

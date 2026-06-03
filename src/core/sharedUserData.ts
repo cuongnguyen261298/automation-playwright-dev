@@ -1,4 +1,3 @@
-import { error } from "console";
 import dotenv from "dotenv";
 
 dotenv.config({
@@ -17,7 +16,7 @@ export enum UserCredential {
 export class SharedUserData {
   private constructor() {
     // singleton, one instance only
-    throw new error("Cannot instantiate class, Only use private props/methods");
+    throw Error("Cannot instantiate class, Only use private props/methods");
   }
 
   private static _accountMap = new Map<string, [string, string]>([
