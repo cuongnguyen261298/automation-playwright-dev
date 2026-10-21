@@ -16,8 +16,7 @@ This skill provides comprehensive guidance for all aspects of Playwright test de
 Consult these references based on what you're doing:
 
 ### Writing New Tests
-
-**When to use**: Creating new test files, writing test cases, implementing test scenarios
+**When to use**: Creating new test files, writing test cases, implementing test scenarios, keep comments brief if necessary, avoid irrelevant or repetitive comments, use cache elements to minimize unnecessary tokens.
 
 | Activity                            | Reference Files                                                                                                                               |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -70,7 +69,7 @@ Consult these references based on what you're doing:
 
 ### Debugging & Troubleshooting
 
-**When to use**: Test failures, element not found, timeouts, unexpected behavior
+**When to use**: Test failures, element not found, timeouts, unexpected behavior, **cache and reuse locators** to minimize unnecessary DOM queries, **reuse test data** instead of recreating it for each test, **use test hooks** to set up and tear down test data and fixtures, **use page objects** to group related test data and fixtures
 
 | Activity                                          | Reference Files                                                                                                                                |
 | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
