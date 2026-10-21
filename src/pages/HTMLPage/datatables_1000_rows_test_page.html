@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataTables — 1,000 Row Test Page</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+  <style>
+    :root { color-scheme: light; }
+    body {
+      margin: 0; padding: 32px 20px; background: #f5f7fb; color: #172033;
+      font: 15px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1200px; margin: 0 auto; }
+    .panel {
+      background: white; border: 1px solid #e4e8f0; border-radius: 14px;
+      padding: 24px; box-shadow: 0 8px 28px rgba(25, 40, 70, .05);
+    }
+    h1 { margin: 0 0 6px; font-size: 26px; }
+    .sub { color: #64708a; margin: 0 0 22px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .pill { border-radius: 999px; padding: 5px 10px; background: #eef3ff; color: #244da8; font-size: 13px; }
+    table.dataTable thead th { white-space: nowrap; }
+    .salary { text-align: right; white-space: nowrap; }
+    .note { color: #64708a; font-size: 13px; margin-top: 16px; }
+    @media (max-width: 700px) { body { padding: 14px 8px; } .panel { padding: 14px; } h1 { font-size: 22px; } }
+  </style>
+</head>
+<body>
+<main>
+  <section class="panel">
+    <h1>Employee directory</h1>
+    <p class="sub">DataTables practice page modeled on the official server-side processing example.</p>
+    <div class="meta">
+      <span class="pill" id="row-count">1,000 records</span>
+      <span class="pill">Search</span>
+      <span class="pill">Sortable columns</span>
+      <span class="pill">Pagination</span>
+    </div>
+
+    <table id="employees" class="display compact" style="width:100%">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Position</th>
+          <th>Office</th>
+          <th>Start date</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p class="note">
+      Test-data note: this standalone page generates 1,000 deterministic sample records in the browser.
+      It reproduces the table-style and core interactions, but does not use the original PHP server-side endpoint.
+    </p>
+  </section>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+<script>
+(() => {
+  const firstNames = ["Ava","Liam","Noah","Emma","Olivia","Ethan","Mia","Lucas","Sophia","Mason","Amelia","James","Isabella","Leo","Evelyn","Henry","Harper","Jack","Ella","Daniel"];
+  const lastNames = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Wilson","Anderson","Thomas","Taylor","Moore","Martin","Lee","Clark","Lewis","Walker","Hall","Young"];
+  const positions = ["Software Engineer","QA Engineer","Product Manager","UX Designer","Data Analyst","DevOps Engineer","Business Analyst","Support Specialist","Technical Lead","Project Manager"];
+  const offices = ["Ho Chi Minh City","Hanoi","Da Nang","Singapore","Tokyo","London","New York","Sydney","Berlin","Toronto"];
+  const rows = [];
+  const pad = n => String(n).padStart(2, "0");
+
+  for (let i = 0; i < 1000; i++) {
+    const first = firstNames[(i * 7 + 3) % firstNames.length];
+    const last = lastNames[(i * 11 + 5) % lastNames.length];
+    const position = positions[(i * 3 + 1) % positions.length];
+    const office = offices[(i * 7 + 2) % offices.length];
+    const year = 2015 + (i % 11);
+    const month = (i % 12) + 1;
+    const day = (i % 28) + 1;
+    const date = `${year}-${pad(month)}-${pad(day)}`;
+    const salary = 42000 + ((i * 1379) % 108000);
+    rows.push([first, last, position, office, date, salary]);
+  }
+
+  document.getElementById("row-count").textContent = `${rows.length.toLocaleString()} records`;
+
+  new DataTable("#employees", {
+    data: rows,
+    columns: [
+      { title: "First name" },
+      { title: "Last name" },
+      { title: "Position" },
+      { title: "Office" },
+      { title: "Start date" },
+      {
+        title: "Salary",
+        className: "salary",
+        render: function (data, type) {
+          return type === "display"
+            ? "$" + Number(data).toLocaleString("en-US")
+            : Number(data);
+        }
+      }
+    ],
+    pageLength: 25,
+    lengthMenu: [10, 25, 50, 100],
+    order: [[1, "asc"]],
+    deferRender: true,
+    language: {
+      search: "Search employees:",
+      lengthMenu: "Show _MENU_ rows",
+      info: "Showing _START_ to _END_ of _TOTAL_ employees",
+      infoEmpty: "No employees to show",
+      zeroRecords: "No matching employees found"
+    }
+  });
+})();
+</script>
+</body>
+</html>
