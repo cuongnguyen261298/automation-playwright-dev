@@ -1,12 +1,11 @@
-
 import { test, expect } from '@playwright/test';
 import path from 'path';
 import { pathToFileURL } from 'url';
 
-test('should navigate through every table page until the last page', async ({ page }) => {
+test('should navigate through all 1,000 pages of the 10K table', async ({ page }) => {
   const filePath = path.resolve(
     process.cwd(),
-    'src/pages/HTMLPage/datatables_1000_rows_test_page.html'
+    'src/pages/HTMLPage/datatables_10000_rows_test_page.html'
   );
 
   await page.goto(pathToFileURL(filePath).href);
@@ -22,7 +21,7 @@ test('should navigate through every table page until the last page', async ({ pa
     page.getByRole('heading', { name: 'Employee directory' })
   ).toBeVisible();
 
-  await expect(rows).toHaveCount(25);
+  await expect(rows).toHaveCount(10);
 
   const infoText = await info.innerText();
   const match = infoText.match(/of ([\d,]+) employees/);
@@ -30,29 +29,30 @@ test('should navigate through every table page until the last page', async ({ pa
   expect(match, `Unexpected table info: ${infoText}`).not.toBeNull();
 
   const totalRows = Number(match![1].replace(/,/g, ''));
-  const pageSize = 25;
+  const pageSize = 10;
   const totalPages = Math.ceil(totalRows / pageSize);
 
-  expect(totalRows).toBe(1000);
+  expect(totalRows).toBe(10_000);
+  expect(totalPages).toBe(1_000);
 
   await expect(currentPage).toHaveText('1');
 
   for (let expectedPage = 2; expectedPage <= totalPages; expectedPage++) {
     await expect(nextButton).toBeEnabled();
     await nextButton.click();
+    await expect(currentPage).toHaveText(
+      expectedPage.toLocaleString('en-US')
+    );
+    await expect(rows).toHaveCount(pageSize);
 
-    await expect(currentPage).toHaveText(String(expectedPage));
-
-    const expectedRows =
-      expectedPage === totalPages
-        ? totalRows - pageSize * (totalPages - 1)
-        : pageSize;
-
-    await expect(rows).toHaveCount(expectedRows);
-
-    console.log(`Page ${expectedPage}/${totalPages} passed`);
+    if (expectedPage % 100 === 0 || expectedPage === totalPages) {
+      console.log(`Progress: page ${expectedPage}/${totalPages}`);
+    }
   }
 
-  await expect(currentPage).toHaveText(String(totalPages));
+  await expect(currentPage).toHaveText(
+  totalPages.toLocaleString('en-US')
+);
+  await expect(rows).toHaveCount(10);
   await expect(nextButton).toBeDisabled();
 });
